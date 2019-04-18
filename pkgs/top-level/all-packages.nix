@@ -21590,6 +21590,8 @@ in
 
   bwa = callPackage ../applications/science/biology/bwa { };
 
+  zonation-core = callPackage ../applications/science/biology/zonation-core { };
+
   ### SCIENCE/MACHINE LEARNING
 
   sc2-headless = callPackage ../applications/science/machine-learning/sc2-headless { };
