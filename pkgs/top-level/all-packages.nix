@@ -32932,6 +32932,8 @@ with pkgs;
 
   gurobi = callPackage ../applications/science/math/gurobi { };
 
+  hpdbscan = callPackage ../applications/science/math/hpdbscan { };
+
   jags = callPackage ../applications/science/math/jags { };
 
   lapack = callPackage ../build-support/alternatives/lapack { };
