@@ -11133,6 +11133,8 @@ with pkgs;
   platformio = if stdenv.isLinux then platformioPackages.platformio-chrootenv else platformioPackages.platformio-core;
   platformio-core = platformioPackages.platformio-core;
 
+  pololu-tic = callPackage ../development/embedded/pololu-tic { };
+
   platinum-searcher = callPackage ../tools/text/platinum-searcher { };
 
   playbar2 = libsForQt5.callPackage ../applications/audio/playbar2 { };
@@ -37991,6 +37993,8 @@ with pkgs;
   stellarium = qt6Packages.callPackage ../applications/science/astronomy/stellarium { };
 
   stellarsolver = libsForQt5.callPackage ../development/libraries/science/astronomy/stellarsolver { };
+
+  ticfocuser-ng = callPackage ../development/libraries/science/astronomy/ticfocuser-ng { };
 
   astrolabe-generator = callPackage ../applications/science/astronomy/astrolabe-generator { };
 
