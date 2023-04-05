@@ -22177,6 +22177,8 @@ with pkgs;
     udev = systemdMinimal;
   };
 
+  libusbp = callPackage ../development/libraries/libusbp { };
+
   libusbgx = callPackage ../development/libraries/libusbgx { };
 
   libusbmuxd = callPackage ../development/libraries/libusbmuxd { };
