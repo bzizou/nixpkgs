@@ -19,6 +19,8 @@
 , ffmpeg
 , version
 , src
+, libev
+, udev
 }:
 
 stdenv.mkDerivation rec {
@@ -31,7 +33,10 @@ stdenv.mkDerivation rec {
   buildInputs = [
     indilib libnova curl cfitsio libusb1 zlib boost gsl gpsd
     libjpeg libgphoto2 libraw libftdi1 libdc1394 ffmpeg fftw
+    libev
   ];
+
+  propagatedBuildInputs = [ udev ];
 
   cmakeFlags = [
     "-DINDI_DATA_DIR=\${CMAKE_INSTALL_PREFIX}/share/indi"
@@ -45,15 +50,15 @@ stdenv.mkDerivation rec {
   ];
 
   postPatch = ''
-    for f in {libfishcamp,libsbig,libqhy}/CMakeLists.txt
+    for f in */CMakeLists.txt
     do
       substituteInPlace $f --replace "/lib/firmware" "lib/firmware"
     done
   '';
 
-  postFixup = ''
-    rm $out/lib/udev/rules.d/99-fli.rules
-  '';
+  #postFixup = ''
+  #  rm $out/lib/udev/rules.d/99-fli.rules
+  #'';
 
   meta = with lib; {
     homepage = "https://www.indilib.org/";

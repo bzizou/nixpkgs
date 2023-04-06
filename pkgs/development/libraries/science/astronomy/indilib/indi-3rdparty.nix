@@ -21,6 +21,7 @@
 , src
 , withFirmware ? false
 , firmware ? null
+, udev
 }:
 
 stdenv.mkDerivation rec {
@@ -38,10 +39,7 @@ stdenv.mkDerivation rec {
   ];
 
   postPatch = ''
-    for f in indi-qsi/CMakeLists.txt \
-             indi-dsi/CMakeLists.txt \
-             indi-armadillo-platypus/CMakeLists.txt \
-             indi-orion-ssg3/CMakeLists.txt
+    for f in */CMakeLists.txt
     do
       substituteInPlace $f \
         --replace "/lib/udev/rules.d" "lib/udev/rules.d" \
@@ -49,7 +47,7 @@ stdenv.mkDerivation rec {
         --replace "/lib/firmware" "lib/firmware"
     done
 
-    sed '1i#include <ctime>' -i indi-duino/libfirmata/src/firmata.cpp # gcc12
+    #sed '1i#include <ctime>' -i indi-duino/libfirmata/src/firmata.cpp # gcc12
   '';
 
   cmakeFlags = [
@@ -61,6 +59,7 @@ stdenv.mkDerivation rec {
     "-DWITH_PENTAX=off"
     "-DWITH_ATIK=off"
     "-DWITH_SX=off"
+    "-DWITH_PLAYERONE=off"
   ] ++ lib.optionals (!withFirmware) [
     "-DWITH_APOGEE=off"
     "-DWITH_DSI=off"
