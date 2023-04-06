@@ -1,0 +1,12 @@
+diff -u -r source.orig/indi_ticfocuser-ng.xml.in source/indi_ticfocuser-ng.xml.in
+--- source.orig/indi_ticfocuser-ng.xml.in	1970-01-01 01:00:01.000000000 +0100
++++ source/indi_ticfocuser-ng.xml.in	2023-04-03 17:34:16.665757382 +0200
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <driversList>
+ <devGroup group="Focusers">
+-	<device label="TIC Focuser NG">
++	<device label="TIC Focuser NG" manufacturer="DIY">
+ 		<driver name="TicFocuser-ng">indi_ticfocuser-ng</driver>
+                 <version>@TICFOCUSER_VERSION_MAJOR@.@TICFOCUSER_VERSION_MINOR@</version>
+ 	</device>
