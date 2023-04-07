@@ -1,0 +1,19 @@
+diff --git a/libs/indidevice/basedevice.cpp b/libs/indidevice/basedevice.cpp
+index 97a400a94..2d03945a6 100644
+--- a/libs/indidevice/basedevice.cpp
++++ b/libs/indidevice/basedevice.cpp
+@@ -280,6 +280,14 @@ static std::string sGetSheletonFilePath(std::string fileName)
+         fileName.erase(0, lastSlashIdx + 1);
+     }
+ 
++    const char * indiskeldir = getenv("INDISKELDIR");
++    if (indiskeldir)
++    {
++        pathName  = std::string(indiskeldir) + fileName;
++        IDLog("Using INDISKELDIR %s\n", pathName.c_str());
++        return pathName;
++    }
++
+     const char * indiprefix = getenv("INDIPREFIX");
+     if (indiprefix)
+     {

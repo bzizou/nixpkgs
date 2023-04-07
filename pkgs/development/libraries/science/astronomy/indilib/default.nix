@@ -25,6 +25,8 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-mU3CrBePBMNdu/HRkCGQcpKUR3/5UayPLJoB8HqVB/Y=";
   };
 
+  patches = [ ./indiskeldir.patch ];
+
   nativeBuildInputs = [
     cmake
   ];
