@@ -20045,6 +20045,8 @@ with pkgs;
 
   cfitsio = callPackage ../development/libraries/science/astronomy/cfitsio { };
 
+  libxisf = callPackage ../development/libraries/science/astronomy/libxisf { };
+
   fontconfig = callPackage ../development/libraries/fontconfig {
     inherit (darwin.apple_sdk.frameworks) CoreFoundation;
   };

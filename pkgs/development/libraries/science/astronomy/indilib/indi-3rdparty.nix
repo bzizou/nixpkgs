@@ -22,6 +22,8 @@
 , withFirmware ? false
 , firmware ? null
 , udev
+, libxisf
+, pkg-config
 }:
 
 stdenv.mkDerivation rec {
@@ -29,11 +31,12 @@ stdenv.mkDerivation rec {
 
   inherit version src;
 
-  nativeBuildInputs = [ cmake ];
+  nativeBuildInputs = [ cmake pkg-config ];
 
   buildInputs = [
     indilib libnova curl cfitsio libusb1 zlib boost gsl gpsd
     libjpeg libgphoto2 libraw libftdi1 libdc1394 ffmpeg fftw
+    libxisf
   ] ++ lib.optionals withFirmware [
     firmware
   ];

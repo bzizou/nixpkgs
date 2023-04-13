@@ -12,6 +12,8 @@
 , libjpeg
 , gsl
 , fftw
+, libxisf
+, pkg-config
 }:
 
 stdenv.mkDerivation rec {
@@ -29,6 +31,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
+    pkg-config
   ];
 
   buildInputs = [
@@ -42,6 +45,7 @@ stdenv.mkDerivation rec {
     libjpeg
     gsl
     fftw
+    libxisf
   ];
 
   cmakeFlags = [

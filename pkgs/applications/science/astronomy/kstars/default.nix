@@ -9,7 +9,8 @@
 
   eigen, zlib,
 
-  cfitsio, indi-full, xplanet, libnova, libraw, gsl, wcslib, stellarsolver
+  cfitsio, indi-full, xplanet, libnova, libraw, gsl, wcslib, stellarsolver,
+  libxisf
 }:
 
 mkDerivation rec {
@@ -31,6 +32,7 @@ mkDerivation rec {
     eigen zlib
 
     cfitsio indi-full xplanet libnova libraw gsl wcslib stellarsolver
+    libxisf
   ];
 
   cmakeFlags = [
