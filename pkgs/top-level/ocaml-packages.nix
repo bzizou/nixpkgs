@@ -18,6 +18,8 @@ let
 
     alcotest-mirage = callPackage ../development/ocaml-modules/alcotest/mirage.nix {};
 
+    algaeff = callPackage ../development/ocaml-modules/algaeff { };
+
     alsa = callPackage ../development/ocaml-modules/alsa { };
 
     angstrom = callPackage ../development/ocaml-modules/angstrom { };
@@ -606,6 +608,8 @@ let
     happy-eyeballs-mirage = callPackage ../development/ocaml-modules/happy-eyeballs/mirage.nix { };
 
     hashcons = callPackage ../development/ocaml-modules/hashcons { };
+
+    headache = callPackage ../development/ocaml-modules/headache { };
 
     hex = callPackage ../development/ocaml-modules/hex { };
 
@@ -1256,8 +1260,6 @@ let
     paf = callPackage ../development/ocaml-modules/paf { };
 
     paf-cohttp = callPackage ../development/ocaml-modules/paf/cohttp.nix { };
-
-    paf-le = callPackage ../development/ocaml-modules/paf/le.nix { };
 
     parany = callPackage ../development/ocaml-modules/parany { };
 

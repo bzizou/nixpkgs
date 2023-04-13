@@ -47,11 +47,11 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "go";
-  version = "1.19.7";
+  version = "1.19.8";
 
   src = fetchurl {
     url = "https://go.dev/dl/go${version}.src.tar.gz";
-    hash = "sha256-d1vfKFzqupQNqKL+IBIlAO/XoLZdvO6FJHhUqNdAJjM=";
+    hash = "sha256-HXpnkp3Mr+r4op5VmFvCt4ngSZyxoXEAA58ITjI42i8=";
   };
 
   strictDeps = true;
@@ -149,13 +149,13 @@ stdenv.mkDerivation rec {
     # Contains the wrong perl shebang when cross compiling,
     # since it is not used for anything we can deleted as well.
     rm src/regexp/syntax/make_perl_groups.pl
-  '' + (if (stdenv.buildPlatform != stdenv.hostPlatform) then ''
+  '' + (if (stdenv.buildPlatform.system != stdenv.hostPlatform.system) then ''
     mv bin/*_*/* bin
     rmdir bin/*_*
     ${lib.optionalString (!(GOHOSTARCH == GOARCH && GOOS == GOHOSTOS)) ''
       rm -rf pkg/${GOHOSTOS}_${GOHOSTARCH} pkg/tool/${GOHOSTOS}_${GOHOSTARCH}
     ''}
-  '' else lib.optionalString (stdenv.hostPlatform != stdenv.targetPlatform) ''
+  '' else lib.optionalString (stdenv.hostPlatform.system != stdenv.targetPlatform.system) ''
     rm -rf bin/*_*
     ${lib.optionalString (!(GOHOSTARCH == GOARCH && GOOS == GOHOSTOS)) ''
       rm -rf pkg/${GOOS}_${GOARCH} pkg/tool/${GOOS}_${GOARCH}
