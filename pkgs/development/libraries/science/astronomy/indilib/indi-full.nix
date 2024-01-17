@@ -2,16 +2,14 @@
 
 let
   inherit (indilib) version;
-#  indi-3rdparty-src = fetchFromGitHub {
-#    owner = "bzizou";
-#    repo = "indi-3rdparty";
-#    rev = "8a121cff899eca6f658971c4aee67380f66defcf";
-#    hash = "sha256-Usin1gw35sXCR/lh8uXKjD2RAaRgQ6YX6hUtWFOANbs=";
-#  };
+  indi-3rdparty-src = fetchFromGitHub {
+    owner = "bzizou";
+    repo = "indi-3rdparty";
+    rev = "0f426179f5b9086ddf2eb64615188e9508f1b66c";
+    hash = "sha256-pc85QJz0qbOMxLWfyCJCg21+9IXy+x6eqGvkcEPbECA=";
+  };
 
-### For local dev - To remove after github push
-  indi-3rdparty-src = ./indi-3rdparty.tgz;
-###
+#  indi-3rdparty-src = ./indi-3rdparty.tgz ;
 
   indi-firmware = callPackage ./indi-firmware.nix {
     inherit version;
