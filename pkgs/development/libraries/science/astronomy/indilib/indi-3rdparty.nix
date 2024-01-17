@@ -26,6 +26,8 @@
 , src
 , withFirmware ? false
 , firmware ? null
+, nlohmann_json
+, pololu-tic
 }:
 
 let
@@ -42,7 +44,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     indilib libnova curl cfitsio libusb1 zlib boost gsl gpsd
     libjpeg libgphoto2 libraw libftdi1 libdc1394 ffmpeg fftw
-    limesuite zeromq
+    limesuite zeromq nlohmann_json pololu-tic
   ] ++ lib.optionals withFirmware [
     firmware
   ];
