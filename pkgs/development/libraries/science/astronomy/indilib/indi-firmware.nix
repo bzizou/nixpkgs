@@ -22,6 +22,7 @@
 , version
 , src
 , autoPatchelfHook
+, pkg-config
 }:
 let
   libusb-with-fxload = libusb1.override { withExamples = true;};
@@ -31,7 +32,7 @@ stdenv.mkDerivation rec {
 
   inherit version src;
 
-  nativeBuildInputs = [ cmake autoPatchelfHook ];
+  nativeBuildInputs = [ cmake autoPatchelfHook pkg-config ];
 
   buildInputs = [
     indilib libnova curl cfitsio libusb1 zlib boost gsl gpsd

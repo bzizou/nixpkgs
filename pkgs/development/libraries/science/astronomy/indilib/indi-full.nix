@@ -5,8 +5,8 @@ let
   indi-3rdparty-src = fetchFromGitHub {
     owner = "bzizou";
     repo = "indi-3rdparty";
-    rev = "0f426179f5b9086ddf2eb64615188e9508f1b66c";
-    hash = "sha256-pc85QJz0qbOMxLWfyCJCg21+9IXy+x6eqGvkcEPbECA=";
+    rev = "bmso";
+    hash = "sha256-7iSfYbQpi6azI241dKBY+W0JsBbKhSzK2HliuFlM63A=";
   };
 
 #  indi-3rdparty-src = ./indi-3rdparty.tgz ;
