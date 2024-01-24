@@ -2371,6 +2371,8 @@ self: super: with self; {
 
   cookies = callPackage ../development/python-modules/cookies { };
 
+  coolname = callPackage ../development/python-modules/coolname { };
+
   coordinates = callPackage ../development/python-modules/coordinates { };
 
   coreapi = callPackage ../development/python-modules/coreapi { };
