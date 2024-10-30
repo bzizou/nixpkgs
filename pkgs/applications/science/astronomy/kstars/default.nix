@@ -2,7 +2,7 @@
 , stdenv
 , mkDerivation
 , extra-cmake-modules
-, fetchFromGitHub
+, fetchurl
 , kconfig
 , kdoctools
 , kguiaddons
@@ -37,13 +37,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "kstars";
-  version = "3.6.8";
+  version = "3.7.2";
 
-  src = fetchFromGitHub {
-    owner = "KDE";
-    repo = "kstars";
-    rev = "b384ced";
-    hash = "sha256-jroyYL/eIkMi+E+IGpODQLonEpww0WAKLeVe41XteHM=";
+  src = fetchurl {
+    url = "mirror://kde/stable/kstars/${finalAttrs.version}/kstars-${finalAttrs.version}.tar.xz";
+    hash = "sha256-fEu3BGBW5cgrY38zBB3iL0/SRrobEtJVsGNWRNtT40s=";
   };
 
   nativeBuildInputs = [
@@ -90,6 +88,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   meta = with lib; {
     description = "Virtual planetarium astronomy software";
+    mainProgram = "kstars";
     homepage = "https://kde.org/applications/education/org.kde.kstars";
     longDescription = ''
       It provides an accurate graphical simulation of the night sky, from any location on Earth, at any date and time.
