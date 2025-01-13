@@ -3732,7 +3732,10 @@ with pkgs;
     spdlog_llvm = spdlog.override { inherit stdenv fmt; };
   })
     irods
-    irods-icommands;
+    irods-icommands
+    irods-pam-interactive
+    irods-with-plugins
+    irods-icommands-with-plugins;
 
   ihaskell = callPackage ../development/tools/haskell/ihaskell/wrapper.nix {
     inherit (haskellPackages) ghcWithPackages;

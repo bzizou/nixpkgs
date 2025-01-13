@@ -31,6 +31,7 @@
   bison,
   flex,
   fetchurl,
+  symlinkJoin
 }:
 
 let
@@ -171,10 +172,10 @@ rec {
 
       cmakeFlags = common.cmakeFlags ++ [
         "-DCMAKE_INSTALL_PREFIX=${stdenv.out}"
-        "-DIRODS_DIR=${irods}/lib/irods/cmake"
-        "-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath,${irods}/lib"
-        "-DCMAKE_MODULE_LINKER_FLAGS=-Wl,-rpath,${irods}/lib"
-        "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-rpath,${irods}/lib"
+        "-DIRODS_DIR=${irods-with-plugins}/lib/irods/cmake"
+        "-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath,${irods-with-plugins}/lib"
+        "-DCMAKE_MODULE_LINKER_FLAGS=-Wl,-rpath,${irods-with-plugins}/lib"
+        "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-rpath,${irods-with-plugins}/lib"
       ];
 
       meta = common.meta // {
@@ -184,4 +185,51 @@ rec {
       };
     }
   );
+
+  # irods-pam-interactive (plugin) package
+  irods-pam-interactive = stdenv.mkDerivation (
+    finalAttrs:
+    common
+    // {
+      version = "0.1.0";
+      pname = "irods-pam-interactive";
+
+      src = fetchFromGitHub {
+        owner = "irods";
+        repo = "irods_auth_plugin_pam_interactive";
+        rev = finalAttrs.version;
+        hash = "sha256-gOWOfv++SC47IOyBQ43hGTqosTNBZ3z72SlsCQ9LQSI=";
+      };
+
+      buildInputs = common.buildInputs ++ [ irods ];
+
+      postPatch =
+        common.postPatch
+        + ''
+          substituteInPlace CMakeLists.txt --replace-fail "PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ" ""
+          substituteInPlace pam_handshake_auth_check/CMakeLists.txt --replace-fail "PERMISSIONS SETUID OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE" ""
+        '';
+
+      cmakeFlags = common.cmakeFlags ++ [
+        "-DIRODS_PLUGINS_DIRECTORY=${placeholder "out"}/lib/irods/plugins"
+        "-DIRODS_DIR=${irods}/lib/irods/cmake"
+        "-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath,${irods}/lib"
+        "-DCMAKE_MODULE_LINKER_FLAGS=-Wl,-rpath,${irods}/lib"
+        "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-rpath,${irods}/lib"
+      ];
+
+      meta = common.meta // {
+        description = common.meta.description + "  pam_interactive plugin";
+        longDescription =
+          common.meta.longDescription + "This package provides the pam_interactive client plugin.";
+      };
+    }
+  );
+
+  # irods-with-plugins
+  irods-with-plugins = symlinkJoin {
+    name = "irods-with-plugins";
+    paths = [ irods irods-pam-interactive ];
+  };
+
 }
